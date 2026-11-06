@@ -6,3 +6,29 @@ generator client {
 datasource db {
 	provider = "postgresql"
 }
+
+enum TransactionType {
+	PAYABLE
+  	RECEIVABLE
+}
+
+enum TransactionStatus {
+	PENDING
+	COMPLETED
+	CANCELLED
+}
+
+model Transaction {
+	id        String   @id @default(uuid())
+
+	amount    Float
+	description String?
+	dueDate   DateTime @db.Date
+	paymentDate DateTime? @db.Date
+
+	status    TransactionStatus @default(PENDING)
+	type      TransactionType
+
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+}

@@ -19,7 +19,7 @@ const config: runtime.GetPrismaClientConfig = {
   engineVersion: '0edf323efd1d98336f3f0a68684b56f689b900d3',
   activeProvider: 'postgresql',
   inlineSchema:
-    'generator client {\n  provider = "prisma-client"\n  output   = "../src/generated/prisma"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n',
+    'generator client {\n  provider = "prisma-client"\n  output   = "../src/generated/prisma"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\nenum TransactionType {\n  PAYABLE\n  RECEIVABLE\n}\n\nenum TransactionStatus {\n  PENDING\n  COMPLETED\n  CANCELLED\n}\n\nmodel Transaction {\n  id String @id @default(uuid())\n\n  amount      Float\n  description String?\n  dueDate     DateTime  @db.Date\n  paymentDate DateTime? @db.Date\n\n  status TransactionStatus @default(PENDING)\n  type   TransactionType\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n',
   runtimeDataModel: {
     models: {},
     enums: {},
@@ -31,10 +31,15 @@ const config: runtime.GetPrismaClientConfig = {
   },
 };
 
-config.runtimeDataModel = JSON.parse('{"models":{},"enums":{},"types":{}}');
+config.runtimeDataModel = JSON.parse(
+  '{"models":{"Transaction":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"amount","kind":"scalar","type":"Float"},{"name":"description","kind":"scalar","type":"String"},{"name":"dueDate","kind":"scalar","type":"DateTime"},{"name":"paymentDate","kind":"scalar","type":"DateTime"},{"name":"status","kind":"enum","type":"TransactionStatus"},{"name":"type","kind":"enum","type":"TransactionType"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"}],"dbName":null,"schema":null}},"enums":{},"types":{}}',
+);
 config.parameterizationSchema = {
-  strings: JSON.parse('[]'),
-  graph: 'AAAA',
+  strings: JSON.parse(
+    '["where","Transaction.findUnique","Transaction.findUniqueOrThrow","orderBy","cursor","Transaction.findFirst","Transaction.findFirstOrThrow","Transaction.findMany","data","Transaction.createOne","Transaction.createMany","Transaction.createManyAndReturn","Transaction.updateOne","Transaction.updateMany","Transaction.updateManyAndReturn","create","update","Transaction.upsertOne","Transaction.deleteOne","Transaction.deleteMany","having","_count","_avg","_sum","_min","_max","Transaction.groupBy","Transaction.aggregate","AND","OR","NOT","id","amount","description","dueDate","paymentDate","TransactionStatus","status","TransactionType","type","createdAt","updatedAt","equals","in","notIn","not","lt","lte","gt","gte","contains","startsWith","endsWith","set","increment","decrement","multiply","divide"]',
+  ),
+  graph:
+    'RgsQDBwAADIAMB0AAAQAEB4AADIAMB8BAAAAASAIADQAISEBADUAISJAADYAISNAADcAISUAADglIicAADknIihAADYAISlAADYAIQEAAAABACABAAAAAQAgDBwAADIAMB0AAAQAEB4AADIAMB8BADMAISAIADQAISEBADUAISJAADYAISNAADcAISUAADglIicAADknIihAADYAISlAADYAIQIhAAA6ACAjAAA6ACADAAAABAAgAwAABQAwBAAAAQAgAwAAAAQAIAMAAAUAMAQAAAEAIAMAAAAEACADAAAFADAEAAABACAJHwEAAAABIAgAAAABIQEAAAABIkAAAAABI0AAAAABJQAAACUCJwAAACcCKEAAAAABKUAAAAABAQgAAAkAIAkfAQAAAAEgCAAAAAEhAQAAAAEiQAAAAAEjQAAAAAElAAAAJQInAAAAJwIoQAAAAAEpQAAAAAEBCAAACwAwAQgAAAsAMAkfAQBAACEgCABBACEhAQBCACEiQABDACEjQABEACElAABFJSInAABGJyIoQABDACEpQABDACECAAAAAQAgCAAADgAgCR8BAEAAISAIAEEAISEBAEIAISJAAEMAISNAAEQAISUAAEUlIicAAEYnIihAAEMAISlAAEMAIQIAAAAEACAIAAAQACACAAAABAAgCAAAEAAgAwAAAAEAIA8AAAkAIBAAAA4AIAEAAAABACABAAAABAAgBxUAADsAIBYAADwAIBcAAD8AIBgAAD4AIBkAAD0AICEAADoAICMAADoAIAwcAAAaADAdAAAXABAeAAAaADAfAQAbACEgCAAcACEhAQAdACEiQAAeACEjQAAfACElAAAgJSInAAAhJyIoQAAeACEpQAAeACEDAAAABAAgAwAAFgAwFAAAFwAgAwAAAAQAIAMAAAUAMAQAAAEAIAwcAAAaADAdAAAXABAeAAAaADAfAQAbACEgCAAcACEhAQAdACEiQAAeACEjQAAfACElAAAgJSInAAAhJyIoQAAeACEpQAAeACEOFQAAIwAgGAAAMQAgGQAAMQAgKgEAAAABKwEAAAAELAEAAAAELQEAMAAhLgEAAAABLwEAAAABMAEAAAABMQEAAAABMgEAAAABMwEAAAABNAEAAAABDRUAACMAIBYAAC8AIBcAAC8AIBgAAC8AIBkAAC8AICoIAAAAASsIAAAA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',
 };
 
 async function decodeBase64AsWasm(
@@ -75,8 +80,8 @@ export interface PrismaClientConstructor {
    * const prisma = new PrismaClient({
    *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
    * })
-   * // Fetch zero or more Users
-   * const users = await prisma.user.findMany()
+   * // Fetch zero or more Transactions
+   * const transactions = await prisma.transaction.findMany()
    * ```
    *
    * Read more in our [docs](https://pris.ly/d/client).
@@ -106,8 +111,8 @@ export interface PrismaClientConstructor {
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more Transactions
+ * const transactions = await prisma.transaction.findMany()
  * ```
  *
  * Read more in our [docs](https://pris.ly/d/client).
@@ -241,6 +246,16 @@ export interface PrismaClient<
       }
     >
   >;
+
+  /**
+   * `prisma.transaction`: Exposes CRUD operations for the **Transaction** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Transactions
+   * const transactions = await prisma.transaction.findMany()
+   * ```
+   */
+  get transaction(): Prisma.TransactionDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

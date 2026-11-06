@@ -13,7 +13,10 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
   app.useGlobalFilters(new HttpExceptionFilter());
-  app.enableCors();
+  app.enableCors({
+    origin: process.env.PUBLIC_API_URL ?? 'http://localhost:3000',
+    credentials: true,
+  });
   app.useGlobalPipes();
   app.use(CookieParser());
   app.use(helmet());

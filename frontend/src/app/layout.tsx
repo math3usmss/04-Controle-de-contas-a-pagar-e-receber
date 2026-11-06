@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="flex min-h-full flex-col">
+      <body className="mx-12 my-6 flex min-h-full flex-col">
         <AppProviders>{children}</AppProviders>
       </body>
     </html>
