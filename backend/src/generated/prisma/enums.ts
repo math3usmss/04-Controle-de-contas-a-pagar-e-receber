@@ -24,3 +24,14 @@ export const TransactionStatus = {
 
 export type TransactionStatus =
   (typeof TransactionStatus)[keyof typeof TransactionStatus];
+
+export const TransactionHistoryAction = {
+  CREATED: 'CREATED',
+  UPDATED: 'UPDATED',
+  PAID: 'PAID',
+  CANCELED: 'CANCELED',
+  REOPENED: 'REOPENED',
+} as const;
+
+export type TransactionHistoryAction =
+  (typeof TransactionHistoryAction)[keyof typeof TransactionHistoryAction];

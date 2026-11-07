@@ -55,6 +55,7 @@ export const AnyNull = runtime.AnyNull;
 
 export const ModelName = {
   Transaction: 'Transaction',
+  TransactionHistory: 'TransactionHistory',
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -87,6 +88,18 @@ export const TransactionScalarFieldEnum = {
 
 export type TransactionScalarFieldEnum =
   (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum];
+
+export const TransactionHistoryScalarFieldEnum = {
+  id: 'id',
+  transactionId: 'transactionId',
+  action: 'action',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type TransactionHistoryScalarFieldEnum =
+  (typeof TransactionHistoryScalarFieldEnum)[keyof typeof TransactionHistoryScalarFieldEnum];
 
 export const SortOrder = {
   asc: 'asc',

@@ -30,6 +30,8 @@ import {
   DeleteTransactionUsecase,
   FindAllTransactionUsecase,
   FindByIdTransactionUsecase,
+  FindTransactionHistoryByTransactionIdUsecase,
+  StatsTransactionUsecase,
   UpdateTransactionUsecase,
 } from '../use-case';
 
@@ -39,9 +41,11 @@ export class TransactionController {
   constructor(
     private readonly createTransactionUsecase: CreateTransactionUsecase,
     private readonly findAllTransactionUsecase: FindAllTransactionUsecase,
+    private readonly findTransactionHistoryByTransactionIdUsecase: FindTransactionHistoryByTransactionIdUsecase,
     private readonly findByIdTransactionUsecase: FindByIdTransactionUsecase,
     private readonly updateTransactionUsecase: UpdateTransactionUsecase,
     private readonly deleteTransactionUsecase: DeleteTransactionUsecase,
+    private readonly statsTransactionUsecase: StatsTransactionUsecase,
   ) {}
 
   @Post()
@@ -73,6 +77,26 @@ export class TransactionController {
     query: QueryTransactionSchemaType,
   ): Promise<FindAllTransactionSchemaReturnType> {
     return this.findAllTransactionUsecase.execute(query);
+  }
+
+  @Get('stats')
+  @ApiOperation({ summary: 'Estatísticas das transações' })
+  @ApiResponse({
+    status: 200,
+    description: 'Estatísticas obtidas com sucesso',
+  })
+  async stats() {
+    return this.statsTransactionUsecase.execute();
+  }
+
+  @Get(':id/history')
+  @ApiOperation({ summary: 'Busca o histórico de uma transação' })
+  @ApiResponse({
+    status: 200,
+    description: 'Histórico encontrado com sucesso',
+  })
+  async findHistoryByTransactionId(@Param('id', ParseUUIDPipe) id: string) {
+    return this.findTransactionHistoryByTransactionIdUsecase.execute(id);
   }
 
   @Get(':id')

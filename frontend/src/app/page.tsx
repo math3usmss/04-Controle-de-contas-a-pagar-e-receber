@@ -4,6 +4,7 @@ import { useState } from "react";
 import {
   DialogCreateTransaction,
   ListTransactions,
+  StatsTransaction,
 } from "@/modules/transaction/components";
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
         <h2 className="text-2xl font-bold">Controle de contas</h2>
         <DialogCreateTransaction />
       </div>
+      <StatsTransaction />
       <ListTransactions page={page} setPage={setPage} />
     </main>
   );

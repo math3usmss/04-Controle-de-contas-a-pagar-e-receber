@@ -428,6 +428,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never
 
 export const ModelName = {
   Transaction: 'Transaction',
+  TransactionHistory: 'TransactionHistory',
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -449,7 +450,7 @@ export type TypeMap<
     omit: GlobalOmitOptions;
   };
   meta: {
-    modelProps: 'transaction';
+    modelProps: 'transaction' | 'transactionHistory';
     txIsolationLevel: TransactionIsolationLevel;
   };
   model: {
@@ -529,6 +530,82 @@ export type TypeMap<
         };
       };
     };
+    TransactionHistory: {
+      payload: Prisma.$TransactionHistoryPayload<ExtArgs>;
+      fields: Prisma.TransactionHistoryFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.TransactionHistoryFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionHistoryPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.TransactionHistoryFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>;
+        };
+        findFirst: {
+          args: Prisma.TransactionHistoryFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionHistoryPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.TransactionHistoryFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>;
+        };
+        findMany: {
+          args: Prisma.TransactionHistoryFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>[];
+        };
+        create: {
+          args: Prisma.TransactionHistoryCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>;
+        };
+        createMany: {
+          args: Prisma.TransactionHistoryCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.TransactionHistoryCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>[];
+        };
+        delete: {
+          args: Prisma.TransactionHistoryDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>;
+        };
+        update: {
+          args: Prisma.TransactionHistoryUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>;
+        };
+        deleteMany: {
+          args: Prisma.TransactionHistoryDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.TransactionHistoryUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.TransactionHistoryUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>[];
+        };
+        upsert: {
+          args: Prisma.TransactionHistoryUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>;
+        };
+        aggregate: {
+          args: Prisma.TransactionHistoryAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTransactionHistory>;
+        };
+        groupBy: {
+          args: Prisma.TransactionHistoryGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.TransactionHistoryGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.TransactionHistoryCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.TransactionHistoryCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
   };
 } & {
   other: {
@@ -582,6 +659,18 @@ export const TransactionScalarFieldEnum = {
 
 export type TransactionScalarFieldEnum =
   (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum];
+
+export const TransactionHistoryScalarFieldEnum = {
+  id: 'id',
+  transactionId: 'transactionId',
+  action: 'action',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type TransactionHistoryScalarFieldEnum =
+  (typeof TransactionHistoryScalarFieldEnum)[keyof typeof TransactionHistoryScalarFieldEnum];
 
 export const SortOrder = {
   asc: 'asc',
@@ -681,6 +770,18 @@ export type EnumTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<
  */
 export type ListEnumTransactionTypeFieldRefInput<$PrismaModel> =
   FieldRefInputType<$PrismaModel, 'TransactionType[]'>;
+
+/**
+ * Reference to a field of type 'TransactionHistoryAction'
+ */
+export type EnumTransactionHistoryActionFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'TransactionHistoryAction'>;
+
+/**
+ * Reference to a field of type 'TransactionHistoryAction[]'
+ */
+export type ListEnumTransactionHistoryActionFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'TransactionHistoryAction[]'>;
 
 /**
  * Reference to a field of type 'Int'
@@ -856,6 +957,7 @@ export type PrismaClientOptions =
   PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter;
 export type GlobalOmitConfig = {
   transaction?: Prisma.TransactionOmit;
+  transactionHistory?: Prisma.TransactionHistoryOmit;
 };
 
 /* Types for Logging */

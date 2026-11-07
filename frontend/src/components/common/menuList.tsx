@@ -13,12 +13,14 @@ interface MenuListProps {
   editComponent?: ReactNode;
   deleteComponent?: ReactNode;
   onEdit?: () => void;
+  onHistory?: () => void;
 }
 
 export default function MenuList({
   editComponent,
   deleteComponent,
   onEdit,
+  onHistory,
 }: MenuListProps) {
   return (
     <>
@@ -41,6 +43,14 @@ export default function MenuList({
             </DropdownMenuItem>
           )}
 
+          {onHistory && (
+            <DropdownMenuItem
+              onClick={onHistory}
+              className="cursor-pointer justify-center"
+            >
+              Histórico
+            </DropdownMenuItem>
+          )}
           {deleteComponent && deleteComponent}
         </DropdownMenuContent>
       </DropdownMenu>

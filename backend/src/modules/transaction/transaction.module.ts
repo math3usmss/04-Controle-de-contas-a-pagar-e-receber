@@ -7,6 +7,8 @@ import {
   DeleteTransactionUsecase,
   FindAllTransactionUsecase,
   FindByIdTransactionUsecase,
+  FindTransactionHistoryByTransactionIdUsecase,
+  StatsTransactionUsecase,
   UpdateTransactionUsecase,
 } from './use-case';
 
@@ -19,7 +21,9 @@ import {
     FindAllTransactionUsecase,
     FindByIdTransactionUsecase,
     UpdateTransactionUsecase,
+    StatsTransactionUsecase,
     DeleteTransactionUsecase,
+    FindTransactionHistoryByTransactionIdUsecase,
   ],
 })
 export class TransactionModule {}

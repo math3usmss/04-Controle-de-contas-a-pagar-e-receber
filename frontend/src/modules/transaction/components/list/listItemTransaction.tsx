@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui";
 
 import { ButtonDeleteTransaction } from "../features";
 import { DialogEditTransaction } from "../forms";
+import { DialogTransactionHistory } from ".";
 
 interface ListItemTransactionProps {
   transaction: FindByIdTransactionSchemaReturnType;
@@ -21,6 +22,7 @@ export default function ListItemTransaction({
   transaction,
 }: ListItemTransactionProps) {
   const [isEdit, setIsEdit] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
   const isPayable = transaction.type === "PAYABLE";
 
   const formattedDate = new Intl.DateTimeFormat("pt-BR", {
@@ -86,6 +88,7 @@ export default function ListItemTransaction({
 
         <MenuList
           onEdit={() => setIsEdit(true)}
+          onHistory={() => setHistoryOpen(true)}
           deleteComponent={<ButtonDeleteTransaction id={transaction.id} />}
           editComponent={
             <DialogEditTransaction
@@ -96,6 +99,11 @@ export default function ListItemTransaction({
           }
         />
       </div>
+      <DialogTransactionHistory
+        transactionId={transaction.id}
+        open={historyOpen}
+        onOpenChange={setHistoryOpen}
+      />
     </li>
   );
 }

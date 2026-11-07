@@ -256,6 +256,7 @@ export type TransactionWhereInput = {
     Prisma.EnumTransactionTypeFilter<'Transaction'> | $Enums.TransactionType;
   createdAt?: Prisma.DateTimeFilter<'Transaction'> | Date | string;
   updatedAt?: Prisma.DateTimeFilter<'Transaction'> | Date | string;
+  transactionHistories?: Prisma.TransactionHistoryListRelationFilter;
 };
 
 export type TransactionOrderByWithRelationInput = {
@@ -268,6 +269,7 @@ export type TransactionOrderByWithRelationInput = {
   type?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
+  transactionHistories?: Prisma.TransactionHistoryOrderByRelationAggregateInput;
 };
 
 export type TransactionWhereUniqueInput = Prisma.AtLeast<
@@ -288,6 +290,7 @@ export type TransactionWhereUniqueInput = Prisma.AtLeast<
       Prisma.EnumTransactionTypeFilter<'Transaction'> | $Enums.TransactionType;
     createdAt?: Prisma.DateTimeFilter<'Transaction'> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<'Transaction'> | Date | string;
+    transactionHistories?: Prisma.TransactionHistoryListRelationFilter;
   },
   'id'
 >;
@@ -349,6 +352,7 @@ export type TransactionCreateInput = {
   type: $Enums.TransactionType;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  transactionHistories?: Prisma.TransactionHistoryCreateNestedManyWithoutTransactionInput;
 };
 
 export type TransactionUncheckedCreateInput = {
@@ -361,6 +365,7 @@ export type TransactionUncheckedCreateInput = {
   type: $Enums.TransactionType;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  transactionHistories?: Prisma.TransactionHistoryUncheckedCreateNestedManyWithoutTransactionInput;
 };
 
 export type TransactionUpdateInput = {
@@ -378,6 +383,7 @@ export type TransactionUpdateInput = {
     | $Enums.TransactionType;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  transactionHistories?: Prisma.TransactionHistoryUpdateManyWithoutTransactionNestedInput;
 };
 
 export type TransactionUncheckedUpdateInput = {
@@ -395,6 +401,7 @@ export type TransactionUncheckedUpdateInput = {
     | $Enums.TransactionType;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  transactionHistories?: Prisma.TransactionHistoryUncheckedUpdateManyWithoutTransactionNestedInput;
 };
 
 export type TransactionCreateManyInput = {
@@ -487,6 +494,11 @@ export type TransactionSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder;
 };
 
+export type TransactionScalarRelationFilter = {
+  is?: Prisma.TransactionWhereInput;
+  isNot?: Prisma.TransactionWhereInput;
+};
+
 export type StringFieldUpdateOperationsInput = {
   set?: string;
 };
@@ -519,6 +531,158 @@ export type EnumTransactionTypeFieldUpdateOperationsInput = {
   set?: $Enums.TransactionType;
 };
 
+export type TransactionCreateNestedOneWithoutTransactionHistoriesInput = {
+  create?: Prisma.XOR<
+    Prisma.TransactionCreateWithoutTransactionHistoriesInput,
+    Prisma.TransactionUncheckedCreateWithoutTransactionHistoriesInput
+  >;
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutTransactionHistoriesInput;
+  connect?: Prisma.TransactionWhereUniqueInput;
+};
+
+export type TransactionUpdateOneRequiredWithoutTransactionHistoriesNestedInput =
+  {
+    create?: Prisma.XOR<
+      Prisma.TransactionCreateWithoutTransactionHistoriesInput,
+      Prisma.TransactionUncheckedCreateWithoutTransactionHistoriesInput
+    >;
+    connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutTransactionHistoriesInput;
+    upsert?: Prisma.TransactionUpsertWithoutTransactionHistoriesInput;
+    connect?: Prisma.TransactionWhereUniqueInput;
+    update?: Prisma.XOR<
+      Prisma.XOR<
+        Prisma.TransactionUpdateToOneWithWhereWithoutTransactionHistoriesInput,
+        Prisma.TransactionUpdateWithoutTransactionHistoriesInput
+      >,
+      Prisma.TransactionUncheckedUpdateWithoutTransactionHistoriesInput
+    >;
+  };
+
+export type TransactionCreateWithoutTransactionHistoriesInput = {
+  id?: string;
+  amount: number;
+  description?: string | null;
+  dueDate: Date | string;
+  paymentDate?: Date | string | null;
+  status?: $Enums.TransactionStatus;
+  type: $Enums.TransactionType;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+};
+
+export type TransactionUncheckedCreateWithoutTransactionHistoriesInput = {
+  id?: string;
+  amount: number;
+  description?: string | null;
+  dueDate: Date | string;
+  paymentDate?: Date | string | null;
+  status?: $Enums.TransactionStatus;
+  type: $Enums.TransactionType;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+};
+
+export type TransactionCreateOrConnectWithoutTransactionHistoriesInput = {
+  where: Prisma.TransactionWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.TransactionCreateWithoutTransactionHistoriesInput,
+    Prisma.TransactionUncheckedCreateWithoutTransactionHistoriesInput
+  >;
+};
+
+export type TransactionUpsertWithoutTransactionHistoriesInput = {
+  update: Prisma.XOR<
+    Prisma.TransactionUpdateWithoutTransactionHistoriesInput,
+    Prisma.TransactionUncheckedUpdateWithoutTransactionHistoriesInput
+  >;
+  create: Prisma.XOR<
+    Prisma.TransactionCreateWithoutTransactionHistoriesInput,
+    Prisma.TransactionUncheckedCreateWithoutTransactionHistoriesInput
+  >;
+  where?: Prisma.TransactionWhereInput;
+};
+
+export type TransactionUpdateToOneWithWhereWithoutTransactionHistoriesInput = {
+  where?: Prisma.TransactionWhereInput;
+  data: Prisma.XOR<
+    Prisma.TransactionUpdateWithoutTransactionHistoriesInput,
+    Prisma.TransactionUncheckedUpdateWithoutTransactionHistoriesInput
+  >;
+};
+
+export type TransactionUpdateWithoutTransactionHistoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  paymentDate?:
+    Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+  status?:
+    | Prisma.EnumTransactionStatusFieldUpdateOperationsInput
+    | $Enums.TransactionStatus;
+  type?:
+    | Prisma.EnumTransactionTypeFieldUpdateOperationsInput
+    | $Enums.TransactionType;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+
+export type TransactionUncheckedUpdateWithoutTransactionHistoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  paymentDate?:
+    Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+  status?:
+    | Prisma.EnumTransactionStatusFieldUpdateOperationsInput
+    | $Enums.TransactionStatus;
+  type?:
+    | Prisma.EnumTransactionTypeFieldUpdateOperationsInput
+    | $Enums.TransactionType;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+
+/**
+ * Count Type TransactionCountOutputType
+ */
+
+export type TransactionCountOutputType = {
+  transactionHistories: number;
+};
+
+export type TransactionCountOutputTypeSelect<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  transactionHistories?:
+    boolean | TransactionCountOutputTypeCountTransactionHistoriesArgs;
+};
+
+/**
+ * TransactionCountOutputType without action
+ */
+export type TransactionCountOutputTypeDefaultArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the TransactionCountOutputType
+   */
+  select?: Prisma.TransactionCountOutputTypeSelect<ExtArgs> | null;
+};
+
+/**
+ * TransactionCountOutputType without action
+ */
+export type TransactionCountOutputTypeCountTransactionHistoriesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.TransactionHistoryWhereInput;
+};
+
 export type TransactionSelect<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
@@ -533,6 +697,9 @@ export type TransactionSelect<
     type?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
+    transactionHistories?:
+      boolean | Prisma.Transaction$transactionHistoriesArgs<ExtArgs>;
+    _count?: boolean | Prisma.TransactionCountOutputTypeDefaultArgs<ExtArgs>;
   },
   ExtArgs['result']['transaction']
 >;
@@ -600,13 +767,31 @@ export type TransactionOmit<
   | 'updatedAt',
   ExtArgs['result']['transaction']
 >;
+export type TransactionInclude<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  transactionHistories?:
+    boolean | Prisma.Transaction$transactionHistoriesArgs<ExtArgs>;
+  _count?: boolean | Prisma.TransactionCountOutputTypeDefaultArgs<ExtArgs>;
+};
+export type TransactionIncludeCreateManyAndReturn<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {};
+export type TransactionIncludeUpdateManyAndReturn<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {};
 
 export type $TransactionPayload<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
   name: 'Transaction';
-  objects: {};
+  objects: {
+    transactionHistories: Prisma.$TransactionHistoryPayload<ExtArgs>[];
+  };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
       id: string;
@@ -1171,6 +1356,22 @@ export interface Prisma__TransactionClient<
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise';
+  transactionHistories<
+    T extends Prisma.Transaction$transactionHistoriesArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<
+      T,
+      Prisma.Transaction$transactionHistoriesArgs<ExtArgs>
+    >,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$TransactionHistoryPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1235,6 +1436,10 @@ export type TransactionFindUniqueArgs<
    */
   omit?: Prisma.TransactionOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null;
+  /**
    * Filter, which Transaction to fetch.
    */
   where: Prisma.TransactionWhereUniqueInput;
@@ -1256,6 +1461,10 @@ export type TransactionFindUniqueOrThrowArgs<
    */
   omit?: Prisma.TransactionOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null;
+  /**
    * Filter, which Transaction to fetch.
    */
   where: Prisma.TransactionWhereUniqueInput;
@@ -1276,6 +1485,10 @@ export type TransactionFindFirstArgs<
    * Omit specific fields from the Transaction
    */
   omit?: Prisma.TransactionOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null;
   /**
    * Filter, which Transaction to fetch.
    */
@@ -1331,6 +1544,10 @@ export type TransactionFindFirstOrThrowArgs<
    */
   omit?: Prisma.TransactionOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null;
+  /**
    * Filter, which Transaction to fetch.
    */
   where?: Prisma.TransactionWhereInput;
@@ -1385,6 +1602,10 @@ export type TransactionFindManyArgs<
    */
   omit?: Prisma.TransactionOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null;
+  /**
    * Filter, which Transactions to fetch.
    */
   where?: Prisma.TransactionWhereInput;
@@ -1438,6 +1659,10 @@ export type TransactionCreateArgs<
    * Omit specific fields from the Transaction
    */
   omit?: Prisma.TransactionOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null;
   /**
    * The data needed to create a Transaction.
    */
@@ -1498,6 +1723,10 @@ export type TransactionUpdateArgs<
    * Omit specific fields from the Transaction
    */
   omit?: Prisma.TransactionOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null;
   /**
    * The data needed to update a Transaction.
    */
@@ -1583,6 +1812,10 @@ export type TransactionUpsertArgs<
    */
   omit?: Prisma.TransactionOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null;
+  /**
    * The filter to search for the Transaction to update in case it exists.
    */
   where: Prisma.TransactionWhereUniqueInput;
@@ -1618,6 +1851,10 @@ export type TransactionDeleteArgs<
    */
   omit?: Prisma.TransactionOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null;
+  /**
    * Filter which Transaction to delete.
    */
   where: Prisma.TransactionWhereUniqueInput;
@@ -1641,6 +1878,37 @@ export type TransactionDeleteManyArgs<
 };
 
 /**
+ * Transaction.transactionHistories
+ */
+export type Transaction$transactionHistoriesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the TransactionHistory
+   */
+  select?: Prisma.TransactionHistorySelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the TransactionHistory
+   */
+  omit?: Prisma.TransactionHistoryOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionHistoryInclude<ExtArgs> | null;
+  where?: Prisma.TransactionHistoryWhereInput;
+  orderBy?:
+    | Prisma.TransactionHistoryOrderByWithRelationInput
+    | Prisma.TransactionHistoryOrderByWithRelationInput[];
+  cursor?: Prisma.TransactionHistoryWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.TransactionHistoryScalarFieldEnum
+    | Prisma.TransactionHistoryScalarFieldEnum[];
+};
+
+/**
  * Transaction without action
  */
 export type TransactionDefaultArgs<
@@ -1655,4 +1923,8 @@ export type TransactionDefaultArgs<
    * Omit specific fields from the Transaction
    */
   omit?: Prisma.TransactionOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null;
 };

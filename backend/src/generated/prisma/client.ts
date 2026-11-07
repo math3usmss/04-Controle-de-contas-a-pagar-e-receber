@@ -49,3 +49,8 @@ export { Prisma };
  *
  */
 export type Transaction = Prisma.TransactionModel;
+/**
+ * Model TransactionHistory
+ *
+ */
+export type TransactionHistory = Prisma.TransactionHistoryModel;
